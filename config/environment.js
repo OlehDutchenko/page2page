@@ -21,6 +21,7 @@ const argv = require('yargs').argv;
  * @prop {string} type
  * @prop {boolean} production
  * @prop {boolean} develop
+ * @prop {boolean} open
  */
 const environment = {
 	get type () {
@@ -34,6 +35,10 @@ const environment = {
 
 	get develop () {
 		return !this.production;
+	},
+
+	get open () {
+		return !!(argv.open);
 	}
 };
 

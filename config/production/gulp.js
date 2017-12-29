@@ -49,7 +49,11 @@ const config = {
 		})
 	],
 
-	sourcemaps: '/'
+	sourcemaps: '/',
+
+	bs () {
+		return {};
+	}
 };
 
 // ----------------------------------------
