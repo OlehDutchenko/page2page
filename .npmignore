@@ -1,0 +1,27 @@
+# fs
+.DS_Store
+thumbs.db
+
+# Nodejs
+.npm/
+node_modules/
+*.log*
+
+# JetBrains
+*.iml
+.idea/
+
+# develop
+tests/
+examples/
+config/
+src/assets/
+src/ejs/
+.babelrc
+.editorconfig
+.eslintrc
+.sass-lint.yml
+*.md
+gulpfile.js
+webpack.stats.json
+webpack.config.js
