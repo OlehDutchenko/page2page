@@ -15,8 +15,6 @@ node_modules/
 tests/
 examples/
 config/
-src/assets/
-src/ejs/
 .babelrc
 .editorconfig
 .eslintrc
