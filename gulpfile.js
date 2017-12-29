@@ -11,16 +11,11 @@
 // ----------------------------------------
 
 // modules
-const path = require('path');
 const gulp = require('gulp');
 const chalk = require('chalk');
-const browserSync = require('browser-sync');
+const browserSync = require('browser-sync').create();
 const ejs = require('gulp-ejs-monster');
-// const eslint = require('gulp-eslint');
-// const jsdoc3 = require('gulp-jsdoc3');
 const postcss = require('gulp-postcss');
-// const rename = require('gulp-rename');
-// const sassLint = require('gulp-sass-lint');
 const sass = require('gulp-sass-monster');
 const sourcemaps = require('gulp-sourcemaps');
 
@@ -36,11 +31,21 @@ const icons = require('./config/notify-icons');
 console.log(chalk.yellow('Starting gulp...'));
 console.log(chalk.yellow(`${environment.type} version`));
 
+/**
+ * Task sources
+ * @const {Object}
+ * @private
+ */
 const sources = {
 	sass: './page2page/page2page.scss',
 	ejs: './examples/ejs/*.ejs'
 };
 
+/**
+ * Errors flags
+ * @const {Object}
+ * @private
+ */
 const wasErrors = {
 	sass: false,
 	ejs: false
@@ -50,7 +55,11 @@ const wasErrors = {
 // Public
 // ----------------------------------------
 
-gulp.task('sass', () => {
+/**
+ * SASS styles render
+ * @sourceCode
+ */
+function sassRender () {
 	let success = true;
 	return gulp.src(sources.sass)
 		.pipe(sourcemaps.init())
@@ -75,13 +84,17 @@ gulp.task('sass', () => {
 					notify.onResolved('gulp-sass-monster');
 				}
 				if (environment.develop) {
-					// browserSync.stream();
+					browserSync.stream();
 				}
 			}
 		});
-});
+}
 
-gulp.task('ejs', () => {
+/**
+ * ejs markup render
+ * @sourceCode
+ */
+function ejsRender () {
 	let success = true;
 	return gulp.src(sources.ejs)
 		.pipe(ejs(config.ejs).on('error', function (err) {
@@ -98,24 +111,28 @@ gulp.task('ejs', () => {
 					notify.onResolved('gulp-ejs-monster');
 				}
 				if (environment.develop) {
-					// browserSync.reload();
+					browserSync.reload();
 				}
 			}
 		});
-});
+}
 
-gulp.task('watch', done => {
-	gulp.watch(sources.sass, gulp.series('sass'));
-	gulp.watch(sources.ejs, gulp.series('ejs'));
+/**
+ * Watching task
+ * @param done
+ * @sourceCode
+ */
+function watch (done) {
+	gulp.watch(sources.sass, sassRender);
+	gulp.watch(sources.ejs, ejsRender);
 	done();
-});
-
-gulp.task('default', gulp.series('sass', 'ejs', 'watch'));
-
-// gulp.task('bs', done => {
-// 	browserSync.init(config.bs, done);
-// });
+}
 
 // ----------------------------------------
 // Exports
 // ----------------------------------------
+
+gulp.task('sass', sassRender);
+gulp.task('ejs', ejsRender);
+gulp.task('watch', watch);
+gulp.task('default', gulp.series('sass', 'ejs', 'watch'));
