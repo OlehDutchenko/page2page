@@ -1,5 +1,5 @@
 {
-  "name": "page-by-page",
+  "name": "page2page",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dutchenkoOleg/page-by-page.git"
+    "url": "git+https://github.com/dutchenkoOleg/page2page.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dutchenkoOleg/page-by-page/issues"
+    "url": "https://github.com/dutchenkoOleg/page2page/issues"
   },
-  "homepage": "https://github.com/dutchenkoOleg/page-by-page#readme",
+  "homepage": "https://github.com/dutchenkoOleg/page2page#readme",
   "devDependencies": {
     "autoprefixer": "^7.2.3",
     "babel-core": "^6.26.0",
