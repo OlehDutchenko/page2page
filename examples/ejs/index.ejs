@@ -11,15 +11,21 @@
 	// view title
 	app.block('view-title', 'Demonstration');
 %>
-<div class="page2page">
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi minima quibusdam suscipit voluptates. Consectetur ex illum officiis vero. Aut dicta dolores eligendi exercitationem incidunt magnam optio quos, sequi tempore voluptatibus?</p>
+<div class="p2p">
+	<div class="p2p-page" data-p2p-anchor="__LIST__">p2p-section</div>
+	<div class="p2p-page" data-p2p-anchor="demo">p2p-section</div>
+	<div class="p2p-page">p2p-section</div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script src="../page2page/page2page.iife.js"></script>
 <script>
 	window.onload = function () {
-		var p2p = window.page2page();
+		var p2p = window.page2page($('.p2p'), {
+			// sectionsSelector: ''
+		});
 		console.log(p2p);
+		p2p.$pages['page-3'].activate();
 	};
 </script>
 

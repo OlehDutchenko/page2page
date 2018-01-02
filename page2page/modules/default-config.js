@@ -12,7 +12,10 @@
 // ----------------------------------------
 
 const defaultConfig = {
-	css3: true
+	css3: true,
+	pageSelector: '.p2p-page',
+	pageSlideSelector: '.p2p-slide',
+	scrollingSpeed: 750
 };
 
 // ----------------------------------------

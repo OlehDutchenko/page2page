@@ -97,7 +97,7 @@ function sassRender () {
 					notify.onResolved('gulp-sass-monster');
 				}
 				if (environment.develop) {
-					browserSync.stream();
+					browserSync.reload('page2page.css');
 				}
 			}
 		});

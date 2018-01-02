@@ -3,6 +3,25 @@
 ////
 
 /// Description
+html,
+body {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	height: 100%;
+}
+
 .p2p {
 	position: relative;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.p2p-page {
+	min-height: 100vh;
+	flex-grow: 1;
+	box-sizing: inherit;
 }
