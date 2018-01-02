@@ -42,7 +42,7 @@ const webpackConfig = {
 		page2page: path.join(process.cwd(), './page2page/page2page.esm.js')
 	},
 	output: {
-		filename: '[name].js',
+		filename: '[name].iife.js',
 		path: path.resolve(process.cwd(), './page2page/')
 	},
 	module: {

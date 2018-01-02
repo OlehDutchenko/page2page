@@ -1,25 +1,15 @@
 <%
 	/**
-	 * @name index.ejs */
+	 * @name index.ejs
+	 * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
+	 * @version 1.0.0
+	 */
 
-	/** Лейаут страницы */
-	// app.setLayout('.ejs');
+	// view layout
+	app.setLayout('base.ejs');
 
-	/** расширение глобального объекта app
-	 * @see module:core */
-	// app.require('core.js')(app);
-
--%>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
-<body>
-	<p>lorem sdfsdf</p>
-</body>
-</html>
+	// view title
+	app.block('view-title', 'Demonstration');
+%>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi minima quibusdam suscipit voluptates. Consectetur ex illum officiis vero. Aut dicta dolores eligendi exercitationem incidunt magnam optio quos, sequi tempore voluptatibus?</p>
 

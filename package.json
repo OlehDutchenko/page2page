@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "gulp default --open",
     "test": "npm run codestyle-build-scripts && npm run codestyle-plugin-scripts && npm run codestyle-plugin-styles",
-    "build": "npm test && gulp build --build",
-    "codestyle-build-scripts": "eslint gulpfile.js config/* --fix --env node",
+    "build": "npm test && npm run build-rollup && npm run build-gulp",
+    "codestyle-build-scripts": "eslint gulpfile.js rollup.config.js config/* --fix --env node",
     "codestyle-plugin-scripts": "eslint page2page/page2page.esm.js page2page/modules/* --fix --env browser",
-    "codestyle-plugin-styles": "sass-lint \"page2page/**/*.scss\" --verbose --no-exit"
+    "codestyle-plugin-styles": "sass-lint \"page2page/**/*.scss\" --verbose --no-exit",
+    "build-rollup": "rollup --config",
+    "build-gulp": "gulp build --build"
   },
   "repository": {
     "type": "git",
@@ -53,6 +55,8 @@
     "normalize.css": "^7.0.0",
     "progress-bar-webpack-plugin": "^1.10.0",
     "rollup": "^0.53.2",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-minify": "^1.0.3",
     "sass-lint": "^1.12.1",
     "sassdoc": "^2.5.0",
     "sort-css-media-queries": "^1.3.4",

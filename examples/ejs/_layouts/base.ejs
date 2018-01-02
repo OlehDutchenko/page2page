@@ -1,0 +1,21 @@
+<%
+	/**
+	 * Base layout
+	 * @name base.ejs
+	 */
+%><!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title><%- `${(app.blocks['view-title'] || 'Main')} | page2page` %></title>
+
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	</head>
+	<body>
+		<%- app.body %>
+	</body>
+</html>
