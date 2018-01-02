@@ -7,7 +7,6 @@ trim_trailing_whitespace = true
 end_of_line = lf
 insert_final_new_line = true
 
-# Только для package.json и yarn.lock
-[{package.json, package-lock.json, yarn.lock, *.yml}]
+[{package.json, package-lock.json, yarn.lock, .sass-lint.yml}]
 indent_style = space
 indent_size = 2

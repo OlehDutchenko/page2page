@@ -3,6 +3,8 @@
 /**
  * Running environment
  * @module
+ * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
+ * @version 1.0.0
  */
 
 // ----------------------------------------
@@ -25,16 +27,16 @@ const argv = require('yargs').argv;
  */
 const environment = {
 	get type () {
-		let type = argv.p || argv.production;
-		return type ? 'production' : 'develop';
+		let type = argv.build;
+		return type ? 'build' : 'develop';
 	},
 
-	get production () {
-		return this.type === 'production';
+	get build () {
+		return this.type === 'build';
 	},
 
 	get develop () {
-		return !this.production;
+		return !this.build;
 	},
 
 	get open () {

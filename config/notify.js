@@ -11,7 +11,6 @@
 // Imports
 // --------------------------------------------------
 
-// модули
 const chalk = require('chalk');
 const nodeNotifier = require('node-notifier');
 const stripAnsi = require('strip-ansi');

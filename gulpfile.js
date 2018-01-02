@@ -10,7 +10,6 @@
 // Imports
 // ----------------------------------------
 
-// modules
 const gulp = require('gulp');
 const chalk = require('chalk');
 const browserSync = require('browser-sync').create();
@@ -20,7 +19,7 @@ const sass = require('gulp-sass-monster');
 const sourcemaps = require('gulp-sourcemaps');
 
 const environment = require('./config/environment');
-const config = require(`./config/${environment.type}/gulp`);
+const config = require(`./config/config-${environment.type}`);
 const notify = require('./config/notify');
 const icons = require('./config/notify-icons');
 
@@ -35,6 +34,7 @@ console.log(chalk.yellow(`${environment.type} version`));
  * Task sources
  * @const {Object}
  * @private
+ * @sourceCode
  */
 const sources = {
 	sass: './page2page/page2page.scss',
@@ -45,11 +45,21 @@ const sources = {
  * Errors flags
  * @const {Object}
  * @private
+ * @sourceCode
  */
 const wasErrors = {
 	sass: false,
 	ejs: false
 };
+
+/**
+ * Save reference ejs config
+ * @const {Object}
+ * @see {@link https://github.com/dutchenkoOleg/gulp-ejs-monster#plugin-options}
+ * @private
+ * @sourceCode
+ */
+const ejsConfig = config.ejs;
 
 // ----------------------------------------
 // Public
@@ -97,7 +107,7 @@ function sassRender () {
 function ejsRender () {
 	let success = true;
 	return gulp.src(sources.ejs)
-		.pipe(ejs(config.ejs).on('error', function (err) {
+		.pipe(ejs(ejsConfig).on('error', function (err) {
 			success = false;
 			wasErrors.ejs = true;
 			notify.onError('gulp-ejs-monster', err.message, icons.ejs);
@@ -128,6 +138,16 @@ function watch (done) {
 	done();
 }
 
+/**
+ * Browser-sync task
+ * @param done
+ * @sourceCode
+ */
+function bs (done) {
+	let options = config.bs(browserSync);
+	browserSync.init(options, done);
+}
+
 // ----------------------------------------
 // Exports
 // ----------------------------------------
@@ -135,4 +155,6 @@ function watch (done) {
 gulp.task('sass', sassRender);
 gulp.task('ejs', ejsRender);
 gulp.task('watch', watch);
-gulp.task('default', gulp.series('sass', 'ejs', 'watch'));
+gulp.task('bs', bs);
+gulp.task('default', gulp.series('sass', 'ejs', 'watch', 'bs'));
+gulp.task('build', gulp.series('sass', 'ejs'));
