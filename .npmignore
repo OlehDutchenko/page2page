@@ -15,11 +15,11 @@ node_modules/
 tests/
 examples/
 config/
+docs/
 .babelrc
 .editorconfig
 .eslintrc
 .sass-lint.yml
 *.md
 gulpfile.js
-webpack.stats.json
-webpack.config.js
+rollup.config.js

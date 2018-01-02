@@ -16,3 +16,14 @@ webpack.stats.json
 
 # tmp
 tmp/
+docs/jsdoc/
+docs/sassdoc/
+
+# W.I.P.
+# delete before publish
+page2page/page2page.iife.js
+page2page/page2page.iife.min.js
+page2page/page2page.iife.min.js.map
+page2page/page2page.css
+page2page/page2page.css.map
+examples/*.html

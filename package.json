@@ -11,7 +11,9 @@
     "codestyle-plugin-scripts": "eslint page2page/page2page.esm.js page2page/modules/* --fix --env browser",
     "codestyle-plugin-styles": "sass-lint \"page2page/**/*.scss\" --verbose --no-exit",
     "build-rollup": "rollup --config",
-    "build-gulp": "gulp build --build"
+    "build-gulp": "gulp build --build",
+    "docs": "gulp docs",
+    "docs-watch": "gulp docs-watch"
   },
   "repository": {
     "type": "git",
@@ -35,6 +37,7 @@
     "classnames": "^2.2.5",
     "css-mqpacker": "^6.0.1",
     "cssnano": "^3.10.0",
+    "del": "^3.0.0",
     "eslint": "^4.14.0",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-import": "^2.8.0",

@@ -11,5 +11,15 @@
 	// view title
 	app.block('view-title', 'Demonstration');
 %>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi minima quibusdam suscipit voluptates. Consectetur ex illum officiis vero. Aut dicta dolores eligendi exercitationem incidunt magnam optio quos, sequi tempore voluptatibus?</p>
+<div class="page2page">
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi minima quibusdam suscipit voluptates. Consectetur ex illum officiis vero. Aut dicta dolores eligendi exercitationem incidunt magnam optio quos, sequi tempore voluptatibus?</p>
+</div>
+
+<script src="../page2page/page2page.iife.js"></script>
+<script>
+	window.onload = function () {
+		var p2p = window.page2page();
+		console.log(p2p);
+	};
+</script>
 

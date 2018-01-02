@@ -17,6 +17,8 @@ const ejs = require('gulp-ejs-monster');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass-monster');
 const sourcemaps = require('gulp-sourcemaps');
+const del = require('del');
+const jsdoc = require('gulp-jsdoc3');
 
 const environment = require('./config/environment');
 const config = require(`./config/config-${environment.type}`);
@@ -38,7 +40,8 @@ console.log(chalk.yellow(`${environment.type} version`));
  */
 const sources = {
 	sass: './page2page/page2page.scss',
-	ejs: './examples/ejs/*.ejs'
+	ejs: './examples/ejs/*.ejs',
+	jsDoc: ['./page2page/page2page.esm.js', './page2page/modules/**/*.js']
 };
 
 /**
@@ -129,7 +132,7 @@ function ejsRender () {
 
 /**
  * Watching task
- * @param done
+ * @param {Function} done
  * @sourceCode
  */
 function watch (done) {
@@ -139,8 +142,76 @@ function watch (done) {
 }
 
 /**
+ * jsdoc generate
+ * @param {Function} done
+ * @sourceCode
+ */
+function jsDoc (done) {
+	let dest = './docs/jsdoc/';
+	del.sync(dest);
+	return gulp.src(sources.jsDoc, {buffer: false})
+		.pipe(jsdoc({
+			source: {
+				includePattern: '.+\\.js(docs|x)?$',
+				excludePattern: '(^|\\/|\\\\)_'
+			},
+			tags: {
+				allowUnknownTags: true,
+				dictionaries: [
+					'jsdoc',
+					'closure'
+				]
+			},
+			opts: {
+				encoding: 'utf8',
+				template: './node_modules/jsdoc-simple-theme/',
+				recurse: true,
+				destination: dest,
+				debug: false,
+				verbose: false
+			},
+			plugins: [
+				'plugins/markdown',
+				'./node_modules/jsdoc-export-default-interop/dist/index',
+				'./node_modules/jsdoc-ignore-code/index',
+				'./node_modules/jsdoc-sourcecode-tag/index'
+			],
+			markdown: {
+				parser: 'gfm',
+				hardwrap: true
+			},
+			templates: {
+				systemName: 'EJS API docs',
+				cleverLinks: false,
+				monospaceLinks: false,
+				default: {
+					outputSourceFiles: true,
+					layoutFile: './node_modules/jsdoc-simple-theme/tmpl/layout.tmpl'
+				}
+			}
+		}, err => {
+			if (err) {
+				notify.onError('gulp-jsdoc3', err.message);
+			} else {
+				chalk.green('gulp-jsdoc3 Done!');
+			}
+			done();
+		}));
+}
+
+/**
+ * Docs watching task
+ * @param {Function} done
+ * @sourceCode
+ */
+function docsWatch (done) {
+	gulp.watch(sources.jsDoc, jsDoc);
+	done();
+}
+
+/**
  * Browser-sync task
- * @param done
+ * @param {Function} done
  * @sourceCode
  */
 function bs (done) {
@@ -152,9 +223,7 @@ function bs (done) {
 // Exports
 // ----------------------------------------
 
-gulp.task('sass', sassRender);
-gulp.task('ejs', ejsRender);
-gulp.task('watch', watch);
-gulp.task('bs', bs);
-gulp.task('default', gulp.series('sass', 'ejs', 'watch', 'bs'));
-gulp.task('build', gulp.series('sass', 'ejs'));
+gulp.task('docs', gulp.series(jsDoc));
+gulp.task('docs-watch', gulp.series('docs', docsWatch));
+gulp.task('default', gulp.series(sassRender, ejsRender, watch, bs));
+gulp.task('build', gulp.series(sassRender, ejsRender));

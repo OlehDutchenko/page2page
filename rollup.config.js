@@ -32,6 +32,7 @@ const config = {
 	],
 	output: {
 		file: './page2page/page2page.iife.js',
+		name: 'page2page',
 		format: 'iife'
 	}
 };

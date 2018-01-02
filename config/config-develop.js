@@ -165,7 +165,7 @@ const config = {
 		return {
 			open: environment.open,
 			server: {
-				baseDir: './examples/'
+				baseDir: './'
 			},
 			middleware: [
 				webpackDevMiddleware(bundler, {
